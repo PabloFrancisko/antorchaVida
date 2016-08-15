@@ -22,7 +22,7 @@ public class RolUsuarioEjb extends GenericDAOImpl<RolUsuario, Integer>{
 		RolUsuario userFinded = new RolUsuario();
 		List<RolUsuario> list = new ArrayList<RolUsuario>();
 		
-		String query = "SELECT u FROM UserRole u where u.user.usrName ='"+user.getUsuNombre()+"'";
+		String query = "SELECT u FROM RolUsuario u where u.usuario.usuNombre ='"+user.getUsuNombre()+"'";
 		try {
 			list = find(query);
 		} catch (Exception e) {
