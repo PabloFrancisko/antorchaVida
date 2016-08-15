@@ -58,8 +58,8 @@
                           	
                           	<div class="Container60 Responsive50">
                             <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
-                                <p:inputText styleClass="Wid90" placeholder="Nombre" value="#{userBean.userSearch.usrName}"/>
-                                <p:inputText styleClass="Wid90" placeholder="Apellido" value="#{userBean.userSearch.usrLastname}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Nombre" value="#{userBean.userSearch.usuNombre}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Apellido" value="#{userBean.userSearch.usuApellido}"/>
                                 
                             </p:panelGrid>
                             </div>
@@ -82,16 +82,12 @@
                     <p:dataTable id="userTable" var="user" value="#{userBean.userList}">
 
 						<p:column headerText="Nombre">
-							<h:outputText value="#{user.usrName}" />
+							<h:outputText value="#{user.usuNombre}" />
 						</p:column>
 
 						<p:column headerText="Apellido">
-							<h:outputText value="#{user.usrLastname}" />
-						</p:column>
-
-						<p:column headerText="Email">
-							<h:outputText value="#{user.usrEmail}" />
-						</p:column>
+							<h:outputText value="#{user.usuApellido}" />
+						</p:column>				
 
 						<p:column headerText="Editar">
 							<center>
@@ -110,35 +106,26 @@
 					<p:ajax event="close" listener="#{userBean.handleClose}" />
 					<h:panelGrid columns="2" cellpadding="2" style="margin:0 auto;">
 
-						<h:outputText value="Nickname:" />
-						<p:inputText id="name" value="#{userBean.user.usrNickName}"
-							style="width: 100%;" 
-							/>
-
 						<h:outputText value="Nombre" />
-						<p:inputText value="#{userBean.user.usrName}"
+						<p:inputText value="#{userBean.user.usuNombre}"
 							style="width: 100%;" />
 
 						<h:outputText value="Apellido:" />
-						<p:inputText value="#{userBean.user.usrLastname}"
+						<p:inputText value="#{userBean.user.usuApellido}"
 							style="width: 100%;" />
 
-
-						<h:outputText value="Email" />
-						<p:inputText value="#{userBean.user.usrEmail}"
-							style="width: 100%;" />
 
 						<h:outputText value="Rol" />
 						<p:selectOneMenu id="advanced" styleClass="width: 100%;"
-							value="#{userBean.userRole.role}" converter="roleConverter"
+							value="#{userBean.userRole.rol}" converter="roleConverter"
 							panelStyle="width:180px" var="t" style="width:160px"
 							>
 							<f:selectItem itemLabel="Seleccione Uno" itemValue="#{null}" />
 							<f:selectItems value="#{userBean.roleList}" var="proj"
-								itemLabel="#{proj.rolName}" itemValue="#{proj}" />
+								itemLabel="#{proj.rolNombre}" itemValue="#{proj}" />
 
 							<p:column>
-								<h:outputText value="#{t.rolName}" />
+								<h:outputText value="#{t.rolNombre}" />
 							</p:column>
 						</p:selectOneMenu>
 
