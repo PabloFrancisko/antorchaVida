@@ -181,74 +181,8 @@ public class UserBean implements Serializable{
 		isNew = Boolean.TRUE;
 		RequestContext.getCurrentInstance().update("userForm:insertDialog");
     }
-	
-
-	public Usuario getUser() {
-		return user;
-	}
-
-	public void setUser(Usuario user) {
-		this.user = user;
-	}
-
-	public Usuario getUserSearch() {
-		return userSearch;
-	}
-
-	public void setUserSearch(Usuario userSearch) {
-		this.userSearch = userSearch;
-	}
-
-	public List<Usuario> getUserList() {
-		return userList;
-	}
-
-	public void setUserList(List<Usuario> userList) {
-		this.userList = userList;
-	}
-
-	public Boolean getIsNew() {
-		return isNew;
-	}
-
-	public void setIsNew(Boolean isNew) {
-		this.isNew = isNew;
-	}
-
-	public String getPasswordWSSH1() {
-		return passwordWSSH1;
-	}
-
-	public void setPasswordWSSH1(String passwordWSSH1) {
-		this.passwordWSSH1 = passwordWSSH1;
-	}
-
-	public String getPasswordWSSH2() {
-		return passwordWSSH2;
-	}
-
-	public void setPasswordWSSH2(String passwordWSSH2) {
-		this.passwordWSSH2 = passwordWSSH2;
-	}
-
-	public String getRegexText() {
-		return regexText;
-	}
-
-	public void setRegexText(String regexText) {
-		this.regexText = regexText;
-	}
-
-	public RolUsuario getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(RolUsuario userRole) {
-		this.userRole = userRole;
-	}
 
 	public List<Rol> getRoleList() {
-		
 		try {
 			roleList = roleAction.findAll();
 		} catch (Exception e) {
@@ -261,7 +195,15 @@ public class UserBean implements Serializable{
 	public void setRoleList(List<Rol> roleList) {
 		this.roleList = roleList;
 	}
-	
+
+	public List<Usuario> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<Usuario> userList) {
+		this.userList = userList;
+	}
 	
 
+	
 }
