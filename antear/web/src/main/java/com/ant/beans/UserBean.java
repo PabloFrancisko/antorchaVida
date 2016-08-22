@@ -30,7 +30,11 @@ public class UserBean implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7927820995066852655L;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4638113655686956639L;
 	/**
 	 * 
 	 */

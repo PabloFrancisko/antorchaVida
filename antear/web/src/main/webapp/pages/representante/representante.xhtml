@@ -1,0 +1,177 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="head">
+		<script type="text/javascript">
+            function skinChart() {
+                this.cfg.shadow = false;
+                this.cfg.title='';
+                this.cfg.seriesColors = ['#FF4081', '#FBB040', '#1C75BC'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#E8E8E8',
+                    shadow: false,
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#778D9B'
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    shadow: false,
+                    markerOptions: {
+                        shadow: false
+                    }
+                }
+            }
+
+            function skinPie() {
+                this.cfg.seriesColors = ['#dae8ef', '#27aae1', '#33ccff', '#9fadb5'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#eaeaea',
+                    gridLineColor: '#e5ebf0',
+                    shadow: false,
+                    borderWidth: 0
+                };
+                this.cfg.seriesDefaults.shadow = false;
+            }
+        </script>
+		<style type="text/css">
+.jqplot-target,.jqplot-axis {
+	color: #778D9B;
+}
+</style>
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="representanteForm">
+		<div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                        <div class="ContainerIndent">
+                          	<h2 class="BigTopic">Búsqueda</h2>
+                          	
+                          	<div class="Container60 Responsive50">
+                            <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
+                                <p:inputText styleClass="Wid90" placeholder="Nombre" value="#{representanteBean.representanteSearch.RApellido}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Apellido" value="#{representanteBean.representanteSearch.RApellido}"/>
+                            </p:panelGrid>
+                            </div>
+                            <div class="Container40 Responsive50">
+                            <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
+								 <p:commandButton value="Buscar"  styleClass="PurpleButton" actionListener="#{representanteBean.search()}"/>
+								 <p:commandButton value="Limpiar" styleClass="PurpleButton" actionListener="#{representanteBean.clean()}"/>
+								 <p:commandButton icon="fa fa-child Fs16 White" styleClass="BlueTextButton RaisedButton" onclick="PF('dlg2').show();"/>                                
+                            </p:panelGrid>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect">
+                    <p:dataTable id="representanteTable" var="representante" value="#{representanteBean.representanteList}">
+
+						<p:column headerText="Nombre">
+							<h:outputText value="#{representante.RNombre}" />
+						</p:column>
+
+						<p:column headerText="Apellido">
+							<h:outputText value="#{representante.RApellido}" />
+						</p:column>			
+						
+						<p:column headerText="CI">
+							<h:outputText value="#{representante.RCi}" />
+						</p:column>	
+						
+						<p:column headerText="Instruccion">
+							<h:outputText value="#{representante.RInstruccion}" />
+						</p:column>	
+						
+						<p:column headerText="Ocupacion">
+							<h:outputText value="#{representante.ROcupacion}" />
+						</p:column>	
+						
+						<p:column headerText="Telf">
+							<h:outputText value="#{representante.RTelf}" />
+						</p:column>		
+						
+						<p:column headerText="Tipo">
+							<h:outputText value="#{representante.RTipo}" />
+						</p:column>	
+
+						<p:column headerText="Editar">
+							<center>
+								
+							</center>
+						</p:column>
+						
+						<p:column headerText="Eliminar">
+							<center>
+								
+							</center>
+						</p:column>
+					</p:dataTable>
+					
+					<p:dialog id="insertDialog" header="Representante"
+					widgetVar="dlg2" height="490" width="500">
+					<h:panelGrid columns="2" cellpadding="2" style="margin:0 auto;">
+
+
+						<h:outputText value="Tipo:" />
+						<p:inputText value="#{representanteBean.representante.RTipo}"
+							style="width: 100%;" />
+							
+						<h:outputText value="Nombre" />
+						<p:inputText value="#{representanteBean.representante.RNombre}"
+							style="width: 100%;" />
+
+						<h:outputText value="Apellido:" />
+						<p:inputText value="#{representanteBean.representante.RApellido}"
+							style="width: 100%;" />
+							
+						<h:outputText value="Cedula:" />
+						<p:inputText value="#{representanteBean.representante.RCi}"
+							style="width: 100%;" />
+							
+						<h:outputText value="Cedula:" />
+        				<p:calendar id="button" value="#{representanteBean.representante.RFechaNac}" showOn="button" />
+						
+						<h:outputText value="Ocupacion:" />
+						<p:inputText value="#{representanteBean.representante.ROcupacion}"
+							style="width: 100%;" />
+						
+						<h:outputText value="Telefono:" />
+						<p:inputText value="#{representanteBean.representante.RTelf}"
+							style="width: 100%;" />
+						
+						<h:outputText value="Instruccion:" />
+						<p:inputText value="#{representanteBean.representante.RInstruccion}"
+							style="width: 100%;" />
+
+						<p:spacer width="100" height="20" />
+						<p:spacer width="100" height="10" />
+					</h:panelGrid>
+
+					<center>
+						<p:commandButton value="Guardar"
+							actionListener="#{representanteBean.save()}" />
+					</center>
+
+
+				</p:dialog>
+                </div>
+            </div>
+        </div>
+        </h:form>
+	</ui:define>
+
+</ui:composition>
