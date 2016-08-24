@@ -27,6 +27,7 @@ public class Area implements Serializable {
 
 	//bi-directional many-to-one association to PacienteArea
 	@OneToMany(mappedBy="area")
+	@Transient
 	private List<PacienteArea> pacienteAreas;
 
 	public Area() {

@@ -1,0 +1,213 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="head">
+		<script type="text/javascript">
+            function skinChart() {
+                this.cfg.shadow = false;
+                this.cfg.title='';
+                this.cfg.seriesColors = ['#FF4081', '#FBB040', '#1C75BC'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#E8E8E8',
+                    shadow: false,
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#778D9B'
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    shadow: false,
+                    markerOptions: {
+                        shadow: false
+                    }
+                }
+            }
+            function skinPie() {
+                this.cfg.seriesColors = ['#dae8ef', '#27aae1', '#33ccff', '#9fadb5'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#eaeaea',
+                    gridLineColor: '#e5ebf0',
+                    shadow: false,
+                    borderWidth: 0
+                };
+                this.cfg.seriesDefaults.shadow = false;
+            }
+        </script>
+		<style type="text/css">
+.jqplot-target,.jqplot-axis {
+	color: #778D9B;
+}
+</style>
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="pacienteForm">
+		<div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                        <div class="ContainerIndent">
+                          	<h2 class="BigTopic">Búsqueda</h2>
+                          	
+                          	<div class="Container60 Responsive50">
+                            <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">                      
+                                <p:inputText styleClass="Wid90" placeholder="Paciente Nombre" value="#{pacienteBean.pacienteSearch.PNombre}"/>
+                                <p:inputText styleClass="Wid90" placeholder="Paciente Apellido" value="#{pacienteBean.pacienteSearch.PApellido}"/>
+                                
+                            </p:panelGrid>
+                            </div>
+                            <div class="Container40 Responsive50">
+                            <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
+								 <p:commandButton value="Buscar"  styleClass="PurpleButton" actionListener="#{pacienteBean.search()}"/>
+								 <p:commandButton value="Limpiar" styleClass="PurpleButton" actionListener="#{paciente.clean()}"/>
+								 <p:commandButton icon="fa fa-child Fs16 White" styleClass="BlueTextButton RaisedButton" onclick="PF('dlg2').show();"/>                                
+                            </p:panelGrid>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect">
+                    <p:dataTable id="pacienteTable" var="paciente" value="#{pacienteBean.pacienteList}">
+
+						<p:column headerText="Paciente Nombre">
+							<h:outputText value="#{paciente.PNombre}" />
+						</p:column>				
+
+						<p:column headerText="Paciente Apellido">
+							<h:outputText value="#{paciente.PApellido}" />
+						</p:column>
+						
+					    <p:column headerText="Fecha de Nacimiento">
+							<h:outputText value="#{paciente.PFechaNac}" />
+						</p:column>				
+
+						<p:column headerText="Cédula de Identidad">
+							<h:outputText value="#{paciente.PCi}" />
+						</p:column>
+
+						<p:column headerText="Carnet">
+							<h:outputText value="#{paciente.PCarnet}" />
+						</p:column>				
+
+						<p:column headerText="Tipo de Discpacidad">
+							<h:outputText value="#{paciente.PTipoDisc}" />
+						</p:column>
+						
+					    <p:column headerText="Tipo de Sangre">
+							<h:outputText value="#{paciente.PTipoSang}" />
+						</p:column>				
+
+						<p:column headerText="Alergias">
+							<h:outputText value="#{paciente.PAlergias}" />
+						</p:column>	
+							
+						<p:column headerText="Domicilio">
+							<h:outputText value="#{paciente.PDomicilio}" />
+						</p:column>				
+
+						<p:column headerText="Teléfono]">
+							<h:outputText value="#{paciente.PTelf}" />
+						</p:column>
+						
+					    <p:column headerText="Email">
+							<h:outputText value="#{paciente.PEmail}" />
+						</p:column>				
+
+						<p:column headerText="Fecha de Ingreso">
+							<h:outputText value="#{paciente.PFechaIng}" />
+						</p:column>				
+						<p:column headerText="Editar">
+							<center>
+								<p:commandButton icon="fa fa-pencil Fs16 White" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{pacienteBean.edit(paciente)}"
+									/>
+								<p:commandButton icon="fa fa-trash Fs16 White" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{pacienteBean.delete(paciente)}"
+									/>
+							</center>
+						</p:column>
+					</p:dataTable>
+					
+					<p:dialog id="insertDialog" header="Paciente"
+					widgetVar="dlg2" height="490" width="500">
+					<p:ajax event="close" listener="#{pacienteBean.handleClose}" />
+					<h:panelGrid columns="2" cellpadding="2" style="margin:0 auto;">
+
+						<h:outputText value="Paciente Nombre" />
+						<p:inputText value="#{pacienteBean.paciente.PNombre}"
+							style="width: 100%;" />
+
+						<h:outputText value="Paciente Apellido" />
+						<p:inputText value="#{pacienteBean.paciente.PApellido}"
+							style="width: 100%;" />
+						
+						<h:outputText value="Fecha de Nacimiento" />
+						<p:calendar id="button" value="#{pacienteBean.paciente.PFechaNac}" showOn="button" />
+						
+
+						<h:outputText value="Cédula de Identidad" />
+						<p:inputText value="#{pacienteBean.paciente.PCi}"
+							style="width: 100%;" />
+					    
+					    			<h:outputText value="Carnet" />
+						<p:inputText value="#{pacienteBean.paciente.PCarnet}"
+							style="width: 100%;" />
+
+						<h:outputText value="Tipo de Discpacidad" />
+						<p:inputText value="#{pacienteBean.paciente.PTipoDisc}"
+							style="width: 100%;" />
+							
+									<h:outputText value="Tipo de Sangre" />
+						<p:inputText value="#{pacienteBean.paciente.PTipoSang}"
+							style="width: 100%;" />
+
+						<h:outputText value="Alergias" />
+						<p:inputText value="#{pacienteBean.paciente.PAlergias}"
+							style="width: 100%;" />
+						
+									<h:outputText value="Domicilio" />
+						<p:inputText value="#{pacienteBean.paciente.PDomicilio}"
+							style="width: 100%;" />
+
+						<h:outputText value="Teléfono" />
+						<p:inputText value="#{pacienteBean.paciente.PTelf}"
+							style="width: 100%;" />
+						
+						<h:outputText value="Email" />
+						<p:inputText value="#{pacienteBean.paciente.PEmail}"
+							style="width: 100%;" />
+
+						<h:outputText value="Fecha de Ingreso" />
+						<p:calendar id="button2" value="#{pacienteBean.paciente.PFechaIng}" showOn="button" />
+						
+
+						<p:spacer width="100" height="20" />
+						<p:spacer width="100" height="10" />
+						
+					</h:panelGrid>
+
+					<center>
+						<p:commandButton value="Guardar"
+							actionListener="#{pacienteBean.save()}" />
+					</center>
+
+
+				</p:dialog>
+                </div>
+            </div>
+        </div>
+        </h:form>
+	</ui:define>
+
+</ui:composition>

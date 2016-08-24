@@ -7,7 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.ant.entities.Representante;
-import com.ant.entities.Usuario;
+
 import com.ant.utils.GenericDAOImpl;
 
 @Stateless

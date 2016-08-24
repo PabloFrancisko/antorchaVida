@@ -3,6 +3,7 @@ package com.ant.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 
 
 /**
@@ -22,8 +23,9 @@ public class Medicamento implements Serializable {
 	@Column(name="M_DOSIS")
 	private String mDosis;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="M_HORARIO")
-	private Time mHorario;
+	private Date mHorario;
 
 	@Column(name="M_MEDIC_TELF")
 	private int mMedicTelf;
@@ -61,11 +63,11 @@ public class Medicamento implements Serializable {
 		this.mDosis = mDosis;
 	}
 
-	public Time getMHorario() {
+	public Date getMHorario() {
 		return this.mHorario;
 	}
 
-	public void setMHorario(Time mHorario) {
+	public void setMHorario(Date mHorario) {
 		this.mHorario = mHorario;
 	}
 

@@ -1,0 +1,184 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="head">
+		<script type="text/javascript">
+            function skinChart() {
+                this.cfg.shadow = false;
+                this.cfg.title='';
+                this.cfg.seriesColors = ['#FF4081', '#FBB040', '#1C75BC'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#E8E8E8',
+                    shadow: false,
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#778D9B'
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    shadow: false,
+                    markerOptions: {
+                        shadow: false
+                    }
+                }
+            }
+            function skinPie() {
+                this.cfg.seriesColors = ['#dae8ef', '#27aae1', '#33ccff', '#9fadb5'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#eaeaea',
+                    gridLineColor: '#e5ebf0',
+                    shadow: false,
+                    borderWidth: 0
+                };
+                this.cfg.seriesDefaults.shadow = false;
+            }
+        </script>
+		<style type="text/css">
+.jqplot-target,.jqplot-axis {
+	color: #778D9B;
+}
+</style>
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="situacionEconomicaForm">
+		<div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                        <div class="ContainerIndent">
+                          	<h2 class="BigTopic">Búsqueda</h2>
+                          	
+                          	<div class="Container60 Responsive50">
+                            <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">                      
+                                <p:inputText styleClass="Wid90" placeholder="situación Económica Madrea" value="#{situacionEconomicaBean.situacionEconomicaSearch.seMadre}"/>
+                                <p:inputText styleClass="Wid90" placeholder="situación Económica Padre" value="#{situacionEconomicaBean.situacionEconomicaSearch.sePadre}"/>
+                                
+                            </p:panelGrid>
+                            </div>
+                            <div class="Container40 Responsive50">
+                            <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
+								 <p:commandButton value="Buscar"  styleClass="PurpleButton" actionListener="#{situacionEconomicaBean.search()}"/>
+								 <p:commandButton value="Limpiar" styleClass="PurpleButton" actionListener="#{situacionEconomicaBean.clean()}"/>
+								 <p:commandButton icon="fa fa-child Fs16 White" styleClass="BlueTextButton RaisedButton" onclick="PF('dlg2').show();"/>                                
+                            </p:panelGrid>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect">
+                    <p:dataTable id="situacionEconomicaTable" var="situacionEconomica" value="#{situacionEconomicaBean.situacionEconomicaList}">
+
+						<p:column headerText="Vivienda">
+							<h:outputText value="#{situacionEconomica.seVivienda}" />
+						</p:column>				
+
+						<p:column headerText="Agua Potable">
+							<h:outputText value="#{situacionEconomica.seAguaPotable}" />
+						</p:column>
+						
+					    <p:column headerText="Luz">
+							<h:outputText value="#{situacionEconomica.seLuz}" />
+						</p:column>				
+
+						<p:column headerText="Alcantarillado">
+							<h:outputText value="#{situacionEconomica.seAlcantarillado}" />
+						</p:column>
+
+						<p:column headerText="Teléfono">
+							<h:outputText value="#{situacionEconomica.seTelf}" />
+						</p:column>				
+
+						<p:column headerText="Situación Económica Padre">
+							<h:outputText value="#{situacionEconomica.sePadre}" />
+						</p:column>
+						
+					    <p:column headerText="Situación Económica Madre">
+							<h:outputText value="#{situacionEconomica.seMadre}" />
+						</p:column>				
+
+						<p:column headerText="Otros">
+							<h:outputText value="#{situacionEconomica.seOtros}" />
+						</p:column>	
+							
+								
+						<p:column headerText="Editar">
+							<center>
+								<p:commandButton icon="fa fa-pencil Fs16 White" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{situacionEconomicaBean.edit(situacionEconomica)}"
+									/>
+								<p:commandButton icon="fa fa-trash Fs16 White" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{situacionEconomicaBean.delete(situacionEconomica)}"
+									/>
+							</center>
+						</p:column>
+					</p:dataTable>
+					
+					<p:dialog id="insertDialog" header="Situación Económica"
+					widgetVar="dlg2" height="490" width="500">
+					<p:ajax event="close" listener="#{situacionEconomicaBean.handleClose}" />
+					<h:panelGrid columns="2" cellpadding="2" style="margin:0 auto;">
+
+						<h:outputText value="Vivienda" />
+						<p:inputText value="#{situacionEconomicaBean.situacionEconomica.seVivienda}"
+							style="width: 100%;" />
+
+						<h:outputText value="Agua Potable" />
+						<p:inputText value="#{situacionEconomicaBean.situacionEconomica.seAguaPotable}"
+							style="width: 100%;" />
+						
+						<h:outputText value="Luz" />
+						<p:inputText value="#{situacionEconomicaBean.situacionEconomica.seLuz}"
+							style="width: 100%;" />
+						
+
+						<h:outputText value="Alcantarillado" />
+						<p:inputText value="#{situacionEconomicaBean.situacionEconomica.seAlcantarillado}"
+							style="width: 100%;" />
+					    
+					    			<h:outputText value="Teléfono" />
+						<p:inputText value="#{situacionEconomicaBean.situacionEconomica.seTelf}"
+							style="width: 100%;" />
+
+						<h:outputText value="Situación Económica Padre" />
+						<p:inputText value="#{situacionEconomicaBean.situacionEconomica.sePadre}"
+							style="width: 100%;" />
+							
+									<h:outputText value="Situación Económica madre" />
+						<p:inputText value="#{situacionEconomicaBean.situacionEconomica.seMadre}"
+							style="width: 100%;" />
+
+						<h:outputText value="Otros" />
+						<p:inputText value="#{situacionEconomicaBean.situacionEconomica.seOtros}"
+							style="width: 100%;" />
+						
+						<p:spacer width="100" height="20" />
+						<p:spacer width="100" height="10" />
+						
+					</h:panelGrid>
+
+					<center>
+						<p:commandButton value="Guardar"
+							actionListener="#{situacionEconomicaBean.save()}" />
+					</center>
+
+
+				</p:dialog>
+                </div>
+            </div>
+        </div>
+        </h:form>
+	</ui:define>
+
+</ui:composition>
