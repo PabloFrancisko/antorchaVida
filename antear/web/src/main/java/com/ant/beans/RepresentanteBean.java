@@ -38,7 +38,7 @@ public class RepresentanteBean implements Serializable{
 	private Representante representanteSearch = new Representante();
 
 	private String regexText = new String();
-	
+	private Boolean isNew = new Boolean(Boolean.TRUE);
 	private List<Representante> representanteList = new ArrayList<Representante>();
 		
 	@EJB
@@ -53,24 +53,28 @@ public class RepresentanteBean implements Serializable{
 	
 	
 	
-	public void save(){
-		try 
-		{
-			representanteAction.persist(representante);
-			representante = new Representante();
-			
+	public void save() {
+
+		try {
+			if(isNew){
+				representanteAction.persist(representante);
+				representante = new Representante();
+			}
+			else{
+				representanteAction.merge(representante);
+				representante = new Representante();
+				isNew = Boolean.TRUE;
+			}
 			RequestContext.getCurrentInstance().update("representanteForm:insertDialog");
-		} 
-		
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 	
-	public void search(){
-		
+	public void search() {
+
 		try {
 			representanteList = representanteAction.findByRepresentanteName(representanteSearch);
 			RequestContext.getCurrentInstance().update("representanteForm:representanteTable");
@@ -80,8 +84,8 @@ public class RepresentanteBean implements Serializable{
 		}
 	}
 	
-	public void delete(Representante rep){
-	
+	public void delete(Representante rep) {
+
 		try {
 			representanteAction.remove(rep);
 			representanteList = representanteAction.findAll();
@@ -98,11 +102,17 @@ public class RepresentanteBean implements Serializable{
 	}
 	
 	public void edit(Representante rep){
+		isNew = Boolean.FALSE;
 		representante = new Representante();	
 		representante = rep;
 		
 		RequestContext.getCurrentInstance().update("representanteForm:insertDialog");
 		RequestContext.getCurrentInstance().execute("PF('dlg2').show();");
+	}
+	
+	public void handleClose(CloseEvent event) {
+		representante = new Representante();
+		RequestContext.getCurrentInstance().update("representanteForm:insertDialog");
 	}
 	
 	public void prueba(){
@@ -140,16 +150,12 @@ public class RepresentanteBean implements Serializable{
 	public void setRepresentanteList(List<Representante> representanteList) {
 		this.representanteList = representanteList;
 	}
+
+	public Boolean getIsNew() {
+		return isNew;
+	}
+
+	public void setIsNew(Boolean isNew) {
+		this.isNew = isNew;
+	}
 }
-//	
-//	
-
-//	
-//	
-
-//	
-//	
-
-//	
-//	
-//	
