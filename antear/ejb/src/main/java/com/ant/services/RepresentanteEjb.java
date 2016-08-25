@@ -6,8 +6,9 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import com.ant.entities.Paciente;
 import com.ant.entities.Representante;
-
+import com.ant.entities.SituacionEconomica;
 import com.ant.utils.GenericDAOImpl;
 
 @Stateless
@@ -39,5 +40,20 @@ public class RepresentanteEjb  extends GenericDAOImpl<Representante, Integer>{
 //		}
 		return list;
 	}
-
+	public Representante findByPaciente3(Paciente paciente){
+		List<Representante> list = new ArrayList<Representante>();
+		Representante representante = new Representante();
+		String query = "SELECT u FROM Representante u where u.paciente.pId = "+paciente.getPId();
+		try {
+			list = find(query);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (Representante aux : list) {
+			representante =aux;
+		}
+		return representante;
+	}
 }

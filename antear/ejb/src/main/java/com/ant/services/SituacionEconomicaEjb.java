@@ -6,7 +6,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-
+import com.ant.entities.Paciente;
 import com.ant.entities.SituacionEconomica;
 import com.ant.utils.GenericDAOImpl;
 
@@ -39,6 +39,24 @@ public class SituacionEconomicaEjb  extends GenericDAOImpl<SituacionEconomica, I
 			return list;
 		}
 		return list;
+	}
+	
+	
+	public SituacionEconomica findByPaciente(Paciente paciente){
+		List<SituacionEconomica> list = new ArrayList<SituacionEconomica>();
+		SituacionEconomica situacionEconomica = new SituacionEconomica();
+		String query = "SELECT u FROM SituacionEconomica u where u.paciente.pId = "+paciente.getPId();
+		try {
+			list = find(query);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (SituacionEconomica aux : list) {
+			situacionEconomica =aux;
+		}
+		return situacionEconomica;
 	}
 
 }

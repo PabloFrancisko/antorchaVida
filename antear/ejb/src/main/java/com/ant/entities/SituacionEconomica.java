@@ -1,6 +1,8 @@
 package com.ant.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 
@@ -19,28 +21,28 @@ public class SituacionEconomica implements Serializable {
 	private int seId;
 
 	@Column(name="SE_AGUA_POTABLE")
-	private byte seAguaPotable;
+	private BigDecimal seAguaPotable;
 
 	@Column(name="SE_ALCANTARILLADO")
-	private byte seAlcantarillado;
+	private int seAlcantarillado;
 
 	@Column(name="SE_LUZ")
-	private byte seLuz;
+	private BigDecimal seLuz;
 
 	@Column(name="SE_MADRE")
-	private String seMadre;
+	private BigDecimal seMadre;
 
 	@Column(name="SE_OTROS")
-	private String seOtros;
+	private BigDecimal seOtros;
 
 	@Column(name="SE_PADRE")
-	private String sePadre;
+	private BigDecimal sePadre;
 
 	@Column(name="SE_TELF")
-	private byte seTelf;
+	private BigDecimal seTelf;
 
 	@Column(name="SE_VIVIENDA")
-	private String seVivienda;
+	private BigDecimal seVivienda;
 
 	//bi-directional many-to-one association to Paciente
 	@ManyToOne
@@ -58,67 +60,67 @@ public class SituacionEconomica implements Serializable {
 		this.seId = seId;
 	}
 
-	public byte getSeAguaPotable() {
+	public BigDecimal getSeAguaPotable() {
 		return this.seAguaPotable;
 	}
 
-	public void setSeAguaPotable(byte seAguaPotable) {
+	public void setSeAguaPotable(BigDecimal seAguaPotable) {
 		this.seAguaPotable = seAguaPotable;
 	}
 
-	public byte getSeAlcantarillado() {
+	public int getSeAlcantarillado() {
 		return this.seAlcantarillado;
 	}
 
-	public void setSeAlcantarillado(byte seAlcantarillado) {
+	public void setSeAlcantarillado(int seAlcantarillado) {
 		this.seAlcantarillado = seAlcantarillado;
 	}
 
-	public byte getSeLuz() {
+	public BigDecimal getSeLuz() {
 		return this.seLuz;
 	}
 
-	public void setSeLuz(byte seLuz) {
+	public void setSeLuz(BigDecimal seLuz) {
 		this.seLuz = seLuz;
 	}
 
-	public String getSeMadre() {
+	public BigDecimal getSeMadre() {
 		return this.seMadre;
 	}
 
-	public void setSeMadre(String seMadre) {
+	public void setSeMadre(BigDecimal seMadre) {
 		this.seMadre = seMadre;
 	}
 
-	public String getSeOtros() {
+	public BigDecimal getSeOtros() {
 		return this.seOtros;
 	}
 
-	public void setSeOtros(String seOtros) {
+	public void setSeOtros(BigDecimal seOtros) {
 		this.seOtros = seOtros;
 	}
 
-	public String getSePadre() {
+	public BigDecimal getSePadre() {
 		return this.sePadre;
 	}
 
-	public void setSePadre(String sePadre) {
+	public void setSePadre(BigDecimal sePadre) {
 		this.sePadre = sePadre;
 	}
 
-	public byte getSeTelf() {
+	public BigDecimal getSeTelf() {
 		return this.seTelf;
 	}
 
-	public void setSeTelf(byte seTelf) {
+	public void setSeTelf(BigDecimal seTelf) {
 		this.seTelf = seTelf;
 	}
 
-	public String getSeVivienda() {
+	public BigDecimal getSeVivienda() {
 		return this.seVivienda;
 	}
 
-	public void setSeVivienda(String seVivienda) {
+	public void setSeVivienda(BigDecimal seVivienda) {
 		this.seVivienda = seVivienda;
 	}
 

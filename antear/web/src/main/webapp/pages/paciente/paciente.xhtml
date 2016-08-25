@@ -65,8 +65,8 @@
                             <div class="Container40 Responsive50">
                             <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="FormContent">
 								 <p:commandButton value="Buscar"  styleClass="PurpleButton" actionListener="#{pacienteBean.search()}"/>
-								 <p:commandButton value="Limpiar" styleClass="PurpleButton" actionListener="#{paciente.clean()}"/>
-								 <p:commandButton icon="fa fa-child Fs16 White" styleClass="BlueTextButton RaisedButton" onclick="PF('dlg2').show();"/>                                
+								 <p:commandButton value="Limpiar" styleClass="PurpleButton" actionListener="#{pacienteBean.clean()}"/>
+								 <p:commandButton icon="fa fa-child Fs16 Blue" styleClass="BlueTextButton RaisedButton" onclick="PF('dlg2').show();"/>                                
                             </p:panelGrid>
                             </div>
                         </div>
@@ -86,12 +86,8 @@
 
 						<p:column headerText="Paciente Apellido">
 							<h:outputText value="#{paciente.PApellido}" />
-						</p:column>
-						
-					    <p:column headerText="Fecha de Nacimiento">
-							<h:outputText value="#{paciente.PFechaNac}" />
-						</p:column>				
-
+						</p:column>						
+				
 						<p:column headerText="Cédula de Identidad">
 							<h:outputText value="#{paciente.PCi}" />
 						</p:column>
@@ -103,39 +99,44 @@
 						<p:column headerText="Tipo de Discpacidad">
 							<h:outputText value="#{paciente.PTipoDisc}" />
 						</p:column>
-						
-					    <p:column headerText="Tipo de Sangre">
-							<h:outputText value="#{paciente.PTipoSang}" />
-						</p:column>				
-
-						<p:column headerText="Alergias">
-							<h:outputText value="#{paciente.PAlergias}" />
-						</p:column>	
-							
-						<p:column headerText="Domicilio">
-							<h:outputText value="#{paciente.PDomicilio}" />
-						</p:column>				
-
-						<p:column headerText="Teléfono]">
+											 
+						<p:column headerText="Teléfono">
 							<h:outputText value="#{paciente.PTelf}" />
-						</p:column>
-						
-					    <p:column headerText="Email">
-							<h:outputText value="#{paciente.PEmail}" />
 						</p:column>				
-
-						<p:column headerText="Fecha de Ingreso">
-							<h:outputText value="#{paciente.PFechaIng}" />
-						</p:column>				
+					 		
+	
 						<p:column headerText="Editar">
 							<center>
-								<p:commandButton icon="fa fa-pencil Fs16 White" styleClass="BlueTextButton RaisedButton"
+								<p:commandButton id="edit" icon="fa fa-pencil Fs16 Blue" styleClass="BlueTextButton RaisedButton"
 									actionListener="#{pacienteBean.edit(paciente)}"
 									/>
-								<p:commandButton icon="fa fa-trash Fs16 White" styleClass="BlueTextButton RaisedButton"
+								<p:tooltip id="toolTipEdit" for="edit" value="Editar" position="bottom"/>
+								
+								<p:commandButton id="delete" icon="fa fa-trash Fs16 Blue" styleClass="BlueTextButton RaisedButton"
 									actionListener="#{pacienteBean.delete(paciente)}"
 									/>
-							</center>
+								<p:tooltip id="toolTipDelete" for="delete" value="Eliminar" position="bottom"/>	
+								
+								<p:commandButton id="sit" icon="fa fa-dollar Fs16 Blue" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{pacienteBean.openSituacionEconomica(paciente)}"
+								/>
+								<p:tooltip id="toolTipSituacionEconomica" for="sit" value="Situacion Economica" position="bottom"/>
+								
+								<p:commandButton id="area" icon="fa fa-home Fs16 Blue" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{pacienteBean.openAreas(paciente)}"
+								/>
+								<p:tooltip id="toolTipArea" for="area" value="Areas" position="bottom"/>
+								
+								<p:commandButton id="med" icon="fa fa-ambulance Fs16 Blue" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{pacienteBean.openMedicamento(paciente)}"
+								/>
+								<p:tooltip id="toolTipMedicamento" for="med" value="Medicamento" position="bottom"/>
+								
+								<p:commandButton id="rep" icon="fa fa-user Fs16 Blue" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{pacienteBean.openRepresentante(paciente)}"
+								/>
+								<p:tooltip id="toolTipRepresentante" for="rep" value="Representante" position="bottom"/>
+							</center> 
 						</p:column>
 					</p:dataTable>
 					
@@ -204,6 +205,156 @@
 
 
 				</p:dialog>
+				
+				<p:dialog id="insertDialogSituacionEconomica" header="Situación Económica"
+					widgetVar="dlg3" height="490" width="500">
+					<p:ajax event="close" listener="#{pacienteBean.handleClose1}" />
+					<h:panelGrid columns="2" cellpadding="2" style="margin:0 auto;">
+
+						<h:outputText value="Vivienda" />
+						<p:inputText value="#{pacienteBean.situacionEconomica.seVivienda}"
+							style="width: 100%;" />
+
+						<h:outputText value="Agua Potable" />
+						<p:inputText value="#{pacienteBean.situacionEconomica.seAguaPotable}"
+							style="width: 100%;" />
+						
+						<h:outputText value="Luz" />
+						<p:inputText value="#{pacienteBean.situacionEconomica.seLuz}"
+							style="width: 100%;" />
+						
+
+						<h:outputText value="Alcantarillado" />
+						<p:inputText value="#{pacienteBean.situacionEconomica.seAlcantarillado}"
+							style="width: 100%;" />
+					    
+					    			<h:outputText value="Teléfono" />
+						<p:inputText value="#{pacienteBean.situacionEconomica.seTelf}"
+							style="width: 100%;" />
+
+						<h:outputText value="Situación Económica Padre" />
+						<p:inputText value="#{pacienteBean.situacionEconomica.sePadre}"
+							style="width: 100%;" />
+							
+									<h:outputText value="Situación Económica madre" />
+						<p:inputText value="#{pacienteBean.situacionEconomica.seMadre}"
+							style="width: 100%;" />
+
+						<h:outputText value="Otros" />
+						<p:inputText value="#{pacienteBean.situacionEconomica.seOtros}"
+							style="width: 100%;" />
+						
+						<p:spacer width="100" height="20" />
+						<p:spacer width="100" height="10" />
+						
+					</h:panelGrid>
+
+					<center>
+						<p:commandButton value="Guardar"
+							actionListener="#{pacienteBean.saveSituacionEconomica()}" />
+					</center>
+
+
+				</p:dialog>
+				
+				
+				
+				<p:dialog id="insertDialogAreas" header="Areas por Paciente"
+					widgetVar="dlg4" height="490" width="500">
+					<p:ajax event="close" listener="#{pacienteBean.handleClose2}" />
+					<h:panelGrid columns="3" cellpadding="3" style="margin:0 auto;">
+
+					<h:outputText value="Area" />
+					<p:selectOneMenu id="advanced" styleClass="width: 100%;"
+						value="#{pacienteBean.pacienteArea.area}" converter="areaConverter"
+						panelStyle="width:180px" var="t" style="width:160px"
+						>
+						<f:selectItem itemLabel="Seleccione Uno" itemValue="#{null}" />
+						<f:selectItems value="#{pacienteBean.areaList}" var="proj"
+							itemLabel="#{proj.ANombre}" itemValue="#{proj}" />
+
+						<p:column>
+							<h:outputText value="#{t.ANombre}" />
+						</p:column>
+					</p:selectOneMenu>
+					
+					<p:commandButton value="Agregar"
+							actionListener="#{pacienteBean.savePacienteArea()}" />
+					
+					
+					</h:panelGrid>
+					
+					<p:dataTable id="pacienteAreaTable" var="pacienteArea" value="#{pacienteBean.pacienteAreaList}">
+
+						<p:column headerText="Paciente Nombre">
+							<h:outputText value="#{pacienteArea.paciente.PNombre}" />
+						</p:column>				
+
+						<p:column headerText="Paciente Apellido">
+							<h:outputText value="#{pacienteArea.paciente.PApellido}" />
+						</p:column>						
+					
+					 	<p:column headerText="Area">
+							<h:outputText value="#{pacienteArea.area.ANombre}" />
+						</p:column>		
+	
+						<p:column headerText="Editar">
+							<center>
+								
+								<p:commandButton id="delete" icon="fa fa-trash Fs16 Blue" styleClass="BlueTextButton RaisedButton"
+									actionListener="#{pacienteBean.deletePacienteArea(pacienteArea)}"
+									/>
+								<p:tooltip id="toolTipDelete" for="delete" value="Eliminar" position="bottom"/>	
+								
+							</center>
+						</p:column>
+					</p:dataTable>
+
+
+				</p:dialog>
+				
+				<p:dialog id="insertDialogMedicamento" header="Medicamento"
+					widgetVar="dlg5" height="490" width="500">
+					<p:ajax event="close" listener="#{pacienteBean.handleClose3}" />
+					<h:panelGrid columns="2" cellpadding="2" style="margin:0 auto;">
+
+						<h:outputText value="Medicamento Presentación" />
+						<p:inputText value="#{pacienteBean.medicamento.MPresentacion}"
+							style="width: 100%;" />
+
+						<h:outputText value="Dosis" />
+						<p:inputText value="#{pacienteBean.medicamento.MDosis}"
+							style="width: 100%;" />
+						
+						<h:outputText value="Horario" />
+						<p:calendar id="datetime" value="#{pacienteBean.medicamento.MHorario}" pattern="MM/dd/yyyy HH:mm:ss" />
+						
+						<h:outputText value="Nombre Médico" />
+						<p:inputText value="#{pacienteBean.medicamento.MMedico}"
+							style="width: 100%;" />
+					    
+					    			<h:outputText value="Médico Teléfono" />
+						<p:inputText value="#{pacienteBean.medicamento.MMedicTelf}"
+							style="width: 100%;" />
+
+						<h:outputText value="Medicamento Nombre" />
+						<p:inputText value="#{pacienteBean.medicamento.MNombre}"
+							style="width: 100%;" />
+							
+									
+						<p:spacer width="100" height="20" />
+						<p:spacer width="100" height="10" />
+						
+					</h:panelGrid>
+
+					<center>
+						<p:commandButton value="Guardar"
+							actionListener="#{pacienteBean.saveMedicamento()}" />
+					</center>
+
+				</p:dialog>
+				
+			
                 </div>
             </div>
         </div>

@@ -7,6 +7,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.ant.entities.Medicamento;
+import com.ant.entities.Paciente;
+import com.ant.entities.SituacionEconomica;
 import com.ant.utils.GenericDAOImpl;
 
 @Stateless
@@ -41,6 +43,23 @@ public class MedicamentoEjb  extends GenericDAOImpl<Medicamento, Integer>{
 		return list;
 	}
 
+	
+	public Medicamento findByPaciente2(Paciente paciente){
+		List<Medicamento> list = new ArrayList<Medicamento>();
+		Medicamento medicamento = new Medicamento();
+		String query = "SELECT u FROM Medicamento u where u.paciente.pId = "+paciente.getPId();
+		try {
+			list = find(query);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (Medicamento aux : list) {
+			medicamento =aux;
+		}
+		return medicamento;
+	}
 }
 
 
